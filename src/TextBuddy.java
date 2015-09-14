@@ -32,12 +32,12 @@ public class TextBuddy {
 	private static File file;
 	private static Scanner scanner = new Scanner(System.in);
 
-	private static final String WELCOME_MESSAGE = "Welcome to TextBuddy. %s is ready for use\n";
-	private static final String COMMAND_MESSAGE = "command: ";
-	private static final String CLEAR_MESSAGE = "all content deleted from ";
-	private static final String DELETE_MESSAGE = "deleted from %1$s: \"%2$s\"%n";
-	private static final String ADD_MESSAGE = "added to %1$s: \"%2$s\"%n";
-	private static final String DISPLAY_MESSAGE = "%1$s is empty\n";
+	private static final String MESSAGE_WELCOME = "Welcome to TextBuddy. %s is ready for use\n";
+	private static final String MESSAGE_COMMAND = "command: ";
+	private static final String MESSAGE_CLEAR = "all content deleted from ";
+	private static final String MESSAGE_DELETE = "deleted from %1$s: \"%2$s\"%n";
+	private static final String MESSAGE_ADD = "added to %1$s: \"%2$s\"%n";
+	private static final String MESSAGE_DISPLAY = "%1$s is empty\n";
 	private static final String INVALID_COMMAND = "invalid command";
 
 	public static void main(String[] args) {
@@ -54,35 +54,35 @@ public class TextBuddy {
 		try {
 			openFile(fileName, textBuddy);
 
-			System.out.printf(WELCOME_MESSAGE, fileName);
+			System.out.printf(MESSAGE_WELCOME, fileName);
 
 			String command = "";
 
 			while (!command.equals("exit")) {
-				System.out.print(COMMAND_MESSAGE);
+				System.out.print(MESSAGE_COMMAND);
 				command = sc.next();
 				String commandPart2 = sc.nextLine();
 
 				if (command.equals("add")) {
-					add(fileName, commandPart2);
+					addCommand(fileName, commandPart2);
 
 				} else if (command.equals("display")) {
-					display(fileName);
+					displayFile(fileName);
 
 				} else if (command.equals("delete")) {
-					delete(fileName, commandPart2);
+					deleteCommand(fileName, commandPart2);
 
 				} else if (command.equals("clear")) {
-					clear(fileName);
+					clearFile(fileName);
 
 				} else if (command.equals("exit")) {
-					exit();
+					exitProgram();
 
 				} else if (command.equals("search")) {
-					search(fileName, commandPart2);
+					searchFile(fileName, commandPart2);
 					
 				} else if (command.equals("sort")) {
-					sort(fileName);
+					sortFile(fileName);
 					
 				} else {
 					System.out.println(INVALID_COMMAND);
@@ -98,20 +98,20 @@ public class TextBuddy {
 		}
 	}
 
-	private static void exit() {
+	private static void exitProgram() {
 		System.exit(0);
 	}
 
-	private static void clear(String fileName) throws IOException {
+	private static void clearFile(String fileName) throws IOException {
 		File file = new File(fileName);
 		FileWriter fw = new FileWriter(file, false);
 		BufferedWriter bw = new BufferedWriter(fw);
 
 		bw.flush();
-		System.out.println(CLEAR_MESSAGE + fileName);
+		System.out.println(MESSAGE_CLEAR + fileName);
 	}
 
-	private static void delete(String fileName, String commandPart2) throws FileNotFoundException, IOException {
+	private static void deleteCommand(String fileName, String commandPart2) throws FileNotFoundException, IOException {
 		try {
 			File file = new File(fileName);
 			FileReader fr = new FileReader(file);
@@ -124,7 +124,7 @@ public class TextBuddy {
 
 			while ((currentLine = br.readLine()) != null) {
 				if (currentIndex == index) {
-					System.out.printf(DELETE_MESSAGE, fileName, currentLine.trim());
+					System.out.printf(MESSAGE_DELETE, fileName, currentLine.trim());
 					currentIndex++;
 					continue;
 				}
@@ -144,7 +144,7 @@ public class TextBuddy {
 		}
 	}
 
-	private static void display(String fileName) throws FileNotFoundException, IOException {
+	private static void displayFile(String fileName) throws FileNotFoundException, IOException {
 		File file = new File(fileName);
 		FileReader fr = new FileReader(file);
 		BufferedReader br = new BufferedReader(fr);
@@ -160,11 +160,11 @@ public class TextBuddy {
 		}
 
 		if (index == 1) {
-			System.out.printf(DISPLAY_MESSAGE, fileName);
+			System.out.printf(MESSAGE_DISPLAY, fileName);
 		}
 	}
 
-	private static void add(String fileName, String commandPart2) throws IOException {
+	private static void addCommand(String fileName, String commandPart2) throws IOException {
 		File file = new File(fileName);
 		FileWriter fw = new FileWriter(file, true);
 		BufferedWriter bw = new BufferedWriter(fw);
@@ -172,7 +172,7 @@ public class TextBuddy {
 		bw.write(commandPart2.trim());
 		bw.newLine();
 		bw.flush();
-		System.out.printf(ADD_MESSAGE, fileName, commandPart2.trim());
+		System.out.printf(MESSAGE_ADD, fileName, commandPart2.trim());
 	}
 
 	private static void openFile(String fileName, TextBuddy textBuddy) throws IOException, FileNotFoundException {
@@ -182,7 +182,7 @@ public class TextBuddy {
 		}
 	}
 	
-	private static void search(String fileName, String commandPart2) throws IOException {
+	private static void searchFile(String fileName, String commandPart2) throws IOException {
 		File file = new File(fileName);
 		FileReader fr = new FileReader(file);
 		BufferedReader br = new BufferedReader(fr);
@@ -204,7 +204,7 @@ public class TextBuddy {
 		}
 	}
 	
-	private static void sort(String fileName) throws IOException {
+	private static void sortFile(String fileName) throws IOException {
 		File file = new File(fileName);
 		FileReader fr = new FileReader(file);
 		BufferedReader br = new BufferedReader(fr);
@@ -221,7 +221,7 @@ public class TextBuddy {
 		}
 		
 		Collections.sort(displayArray);
-		clear(fileName);
+		clearFile(fileName);
 		
 		for(int i=0; i<displayArray.size(); i++) {
 			String content = displayArray.get(i);
