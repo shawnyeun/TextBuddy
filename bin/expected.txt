@@ -1,0 +1,25 @@
+Welcome to TextBuddy. myTextFile.txt is ready for use
+command: added to myTextFile.txt: "the little brown fox"
+
+command: added to myTextFile.txt: "jumps over the wall"
+
+command: 1. the little brown fox
+2. jumps over the wall
+
+command: deleted from myTextFile.txt: "jumps over the wall"
+
+command: 1. the little brown fox
+
+command: added to myTextFile.txt: "hops over the moon"
+
+command: deleted from myTextFile.txt: "the little brown fox"
+
+command: 1. hops over the moon
+
+command: all content deleted from myTextFile.txt
+
+command: myTextFile.txt is empty
+
+command: added to myTextFile.txt: "TESTING SAVE FUNCTION AFTER CLOSING FILE"
+
+command: 

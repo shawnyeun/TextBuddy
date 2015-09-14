@@ -1,0 +1,12 @@
+add the little brown fox
+add jumps over the wall
+display
+delete 2
+display
+add hops over the moon
+delete 1
+display 
+clear
+display
+add TESTING SAVE FUNCTION AFTER CLOSING FILE
+exit
