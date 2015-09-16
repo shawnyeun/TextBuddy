@@ -6,7 +6,7 @@ public class TextBuddyTest {
 
 	@Test
 	public void test() {
-		assertEquals("test", true, TextBuddy.testIfStringIsEmpty("not"));
+		assertSame("test", 5, TextBuddy.searchFile("myTextFile.txt", "fox"));
 	}
 
 }
