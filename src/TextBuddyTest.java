@@ -6,7 +6,8 @@ public class TextBuddyTest {
 
 	@Test
 	public void test() {
-		assertSame("test", 5, TextBuddy.searchFile("myTextFile.txt", "fox"));
+		assertSame("test", 1, TextBuddy.searchFile("myTextFile.txt", "aaa"));
 	}
+	
 
 }
