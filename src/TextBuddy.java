@@ -50,7 +50,7 @@ public class TextBuddy {
 		prepareFile(scanner, fileName, textBuddy);
 
 	}
-
+	
 	private static void prepareFile(Scanner sc, String fileName, TextBuddy textBuddy) {
 		try {
 			openFile(fileName, textBuddy);
@@ -75,7 +75,7 @@ public class TextBuddy {
 
 				} else if (command.equals("clear")) {
 					clearFile(fileName);
-					System.out.println(MESSAGE_CLEAR + fileName);
+					clearFileMessage(fileName);
 
 				} else if (command.equals("exit")) {
 					exitProgram();
@@ -98,6 +98,10 @@ public class TextBuddy {
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private static void clearFileMessage(String fileName) {
+		System.out.println(MESSAGE_CLEAR + fileName);
 	}
 
 	private static void exitProgram() {
@@ -165,7 +169,7 @@ public class TextBuddy {
 		}
 	}
 
-	private static void addCommand(String fileName, String commandPart2) throws IOException {
+	public static String addCommand(String fileName, String commandPart2) throws IOException {
 		File file = new File(fileName);
 		FileWriter fw = new FileWriter(file, true);
 		BufferedWriter bw = new BufferedWriter(fw);
@@ -174,6 +178,8 @@ public class TextBuddy {
 		bw.newLine();
 		bw.flush();
 		System.out.printf(MESSAGE_ADD, fileName, commandPart2.trim());
+		
+		return commandPart2;
 	}
 
 	private static void openFile(String fileName, TextBuddy textBuddy) throws IOException, FileNotFoundException {
@@ -240,5 +246,4 @@ public class TextBuddy {
 	}
 	
 
-	
 }
