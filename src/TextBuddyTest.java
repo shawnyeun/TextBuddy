@@ -18,5 +18,8 @@ public class TextBuddyTest {
 	public void testAddCommand() throws IOException {
 		assertSame("test if string is added", "eee", TextBuddy.addCommand("textfile.txt", "eee"));
 	}
-		
+	
+	public void testClearFile() throws IOException {
+		assertEquals("Tests if file is cleared", true, TextBuddy.clearFile("textfile.txt"));
+	}
 }

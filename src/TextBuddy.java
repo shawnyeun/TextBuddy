@@ -50,7 +50,7 @@ public class TextBuddy {
 		prepareFile(scanner, fileName, textBuddy);
 
 	}
-	
+
 	private static void prepareFile(Scanner sc, String fileName, TextBuddy textBuddy) {
 		try {
 			openFile(fileName, textBuddy);
@@ -100,7 +100,7 @@ public class TextBuddy {
 		}
 	}
 
-	private static void clearFileMessage(String fileName) {
+	public static void clearFileMessage(String fileName) {
 		System.out.println(MESSAGE_CLEAR + fileName);
 	}
 
@@ -108,12 +108,28 @@ public class TextBuddy {
 		System.exit(0);
 	}
 
-	private static void clearFile(String fileName) throws IOException {
+	public static boolean clearFile(String fileName) throws IOException {
 		File file = new File(fileName);
 		FileWriter fw = new FileWriter(file, false);
 		BufferedWriter bw = new BufferedWriter(fw);
+		FileReader fr = new FileReader(file);
+		BufferedReader br = new BufferedReader(fr);
 
 		bw.flush();
+		
+		//creates a new array to check if list is empty
+		String displayLine;
+		ArrayList<String> displayArray = new ArrayList<String>();
+
+		while ((displayLine = br.readLine()) != null) {
+			displayArray.add(displayLine);
+		}
+		if (displayArray.size() == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	private static void deleteCommand(String fileName, String commandPart2) throws FileNotFoundException, IOException {
@@ -178,7 +194,7 @@ public class TextBuddy {
 		bw.newLine();
 		bw.flush();
 		System.out.printf(MESSAGE_ADD, fileName, commandPart2.trim());
-		
+
 		return commandPart2;
 	}
 
@@ -211,39 +227,37 @@ public class TextBuddy {
 				index++;
 			}
 		}
-		
+
 		return count;
 	}
-	
+
 	public static boolean sortFile(String fileName) throws IOException {
 		File file = new File(fileName);
 		FileReader fr = new FileReader(file);
 		BufferedReader br = new BufferedReader(fr);
-		
+
 		FileWriter fw = new FileWriter(file, true);
 		BufferedWriter bw = new BufferedWriter(fw);
-		
+
 		String displayLine;
 		ArrayList<String> displayArray = new ArrayList<String>();
-		
-		
+
 		while ((displayLine = br.readLine()) != null) {
 			displayArray.add(displayLine);
 		}
-		
+
 		Collections.sort(displayArray);
 		clearFile(fileName);
-		
-		for(int i=0; i<displayArray.size(); i++) {
+
+		for (int i = 0; i < displayArray.size(); i++) {
 			String content = displayArray.get(i);
 			bw.write(content);
 			bw.newLine();
 			bw.flush();
 		}
-		
+
 		System.out.println("Sorted");
 		return true;
 	}
-	
 
 }
