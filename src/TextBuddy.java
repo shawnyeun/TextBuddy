@@ -83,11 +83,10 @@ public class TextBuddy {
 				} else if (command.equals("search")) {
 					searchFile(fileName, commandPart2);
 
-				}// else if (command.equals("sort")) {
-					//sortFile(fileName);
+				} else if (command.equals("sort")) {
+					sortFile(fileName);
 
-				//} 
-				else {
+				} else {
 					System.out.println(INVALID_COMMAND);
 				}
 
@@ -209,6 +208,37 @@ public class TextBuddy {
 		
 		return count;
 	}
+	
+	public static boolean sortFile(String fileName) throws IOException {
+		File file = new File(fileName);
+		FileReader fr = new FileReader(file);
+		BufferedReader br = new BufferedReader(fr);
+		
+		FileWriter fw = new FileWriter(file, true);
+		BufferedWriter bw = new BufferedWriter(fw);
+		
+		String displayLine;
+		ArrayList<String> displayArray = new ArrayList<String>();
+		
+		
+		while ((displayLine = br.readLine()) != null) {
+			displayArray.add(displayLine);
+		}
+		
+		Collections.sort(displayArray);
+		clearFile(fileName);
+		
+		for(int i=0; i<displayArray.size(); i++) {
+			String content = displayArray.get(i);
+			bw.write(content);
+			bw.newLine();
+			bw.flush();
+		}
+		
+		System.out.println("Sorted");
+		return true;
+	}
+	
 
 	
 }

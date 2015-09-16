@@ -11,8 +11,8 @@ public class TextBuddyTest {
 		assertSame("test number of counts of word", 1, TextBuddy.searchFile("textfile.txt", "aaa"));
 	}
 	
-	public void testSortFile() {
-		assertEquals("Compare strings", true, TextBuddy.sortFile("textfile.txt", "true") );
+	public void testSortFile() throws IOException {
+		assertEquals("Compare strings", true, TextBuddy.sortFile("textfile.txt") );
 	}
 		
 }
