@@ -74,6 +74,7 @@ public class TextBuddy {
 
 				} else if (command.equals("clear")) {
 					clearFile(fileName);
+					System.out.println(MESSAGE_CLEAR + fileName);
 
 				} else if (command.equals("exit")) {
 					exitProgram();
@@ -108,7 +109,6 @@ public class TextBuddy {
 		BufferedWriter bw = new BufferedWriter(fw);
 
 		bw.flush();
-		System.out.println(MESSAGE_CLEAR + fileName);
 	}
 
 	private static void deleteCommand(String fileName, String commandPart2) throws FileNotFoundException, IOException {
@@ -193,7 +193,7 @@ public class TextBuddy {
 		
 		while ((displayLine = br.readLine()) != null) {
 			ArrayList<String> displayArray = new ArrayList<String>(Arrays.asList(displayLine.split(" ")));
-			
+	
 			for(int i=0; i<displayArray.size(); i++) {
 				String searchWord = displayArray.get(i);
 				if (searchWord.equals(commandPart2)) {
@@ -232,5 +232,12 @@ public class TextBuddy {
 		
 		System.out.println("Sorted");
 		
+	}
+	
+	public static boolean testIfStringIsEmpty(String str){
+		if(str.isEmpty()){
+			return true;
+		}
+		return false;
 	}
 }
