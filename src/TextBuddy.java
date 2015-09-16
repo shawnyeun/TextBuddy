@@ -1,3 +1,4 @@
+
 /**
  *AUTHOR'S NOTES 
  *This program will scan user input to add a string, display a string,
@@ -81,11 +82,12 @@ public class TextBuddy {
 
 				} else if (command.equals("search")) {
 					searchFile(fileName, commandPart2);
-					
-				} else if (command.equals("sort")) {
-					sortFile(fileName);
-					
-				} else {
+
+				}// else if (command.equals("sort")) {
+					//sortFile(fileName);
+
+				//} 
+				else {
 					System.out.println(INVALID_COMMAND);
 				}
 
@@ -181,6 +183,32 @@ public class TextBuddy {
 			file.createNewFile();
 		}
 	}
-	
+
+	public static int searchFile(String fileName, String commandPart2) throws IOException {
+		File file = new File(fileName);
+		FileReader fr = new FileReader(file);
+		BufferedReader br = new BufferedReader(fr);
+
+		commandPart2 = commandPart2.trim();
+		String displayLine;
+		int index = 1;
+		int count = 0;
+
+		while ((displayLine = br.readLine()) != null) {
+			ArrayList<String> displayArray = new ArrayList<String>(Arrays.asList(displayLine.split(" ")));
+
+			for (int i = 0; i < displayArray.size(); i++) {
+				String searchWord = displayArray.get(i);
+				if (searchWord.equals(commandPart2)) {
+					System.out.printf("%s found in line %s\n", commandPart2, index);
+					count++;
+				}
+				index++;
+			}
+		}
+		
+		return count;
+	}
+
 	
 }
