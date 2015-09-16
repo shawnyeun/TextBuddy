@@ -33,6 +33,7 @@ public class TextBuddy {
 	private static File file;
 	private static Scanner scanner = new Scanner(System.in);
 
+	// display messages
 	private static final String MESSAGE_WELCOME = "Welcome to TextBuddy. %s is ready for use\n";
 	private static final String MESSAGE_COMMAND = "command: ";
 	private static final String MESSAGE_CLEAR = "all content deleted from ";
@@ -51,6 +52,13 @@ public class TextBuddy {
 
 	}
 
+	/**
+	 * this method calls the openFile method, as well as other methods according to the user input
+	 * until the user inputs the command "exit"
+	 * @param sc
+	 * @param fileName
+	 * @param textBuddy
+	 */
 	private static void prepareFile(Scanner sc, String fileName, TextBuddy textBuddy) {
 		try {
 			openFile(fileName, textBuddy);
@@ -100,14 +108,29 @@ public class TextBuddy {
 		}
 	}
 
+	/**
+	 * This method prints a message to show that file is cleared.
+	 * 
+	 * @param fileName
+	 */
 	public static void clearFileMessage(String fileName) {
 		System.out.println(MESSAGE_CLEAR + fileName);
 	}
 
+	/**
+	 * This method exits the program
+	 */
 	private static void exitProgram() {
 		System.exit(0);
 	}
 
+	/**
+	 * This method clears the entire file
+	 * 
+	 * @param fileName
+	 * @return true if file is cleared
+	 * @throws IOException
+	 */
 	public static boolean clearFile(String fileName) throws IOException {
 		File file = new File(fileName);
 		FileWriter fw = new FileWriter(file, false);
@@ -116,8 +139,8 @@ public class TextBuddy {
 		BufferedReader br = new BufferedReader(fr);
 
 		bw.flush();
-		
-		//creates a new array to check if list is empty
+
+		// creates a new array to check if list is empty
 		String displayLine;
 		ArrayList<String> displayArray = new ArrayList<String>();
 
@@ -125,13 +148,23 @@ public class TextBuddy {
 			displayArray.add(displayLine);
 		}
 		if (displayArray.size() == 0) {
+
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
+
 	}
 
+	/**
+	 * 
+	 * This method deletes 1 line of the file
+	 * 
+	 * @param fileName
+	 * @param commandPart2
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	private static void deleteCommand(String fileName, String commandPart2) throws FileNotFoundException, IOException {
 		try {
 			File file = new File(fileName);
@@ -165,6 +198,12 @@ public class TextBuddy {
 		}
 	}
 
+	/**
+	 * This method displays the lines of text in the file
+	 * @param fileName
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	private static void displayFile(String fileName) throws FileNotFoundException, IOException {
 		File file = new File(fileName);
 		FileReader fr = new FileReader(file);
@@ -185,6 +224,13 @@ public class TextBuddy {
 		}
 	}
 
+	/**
+	 * This method adds a user command to the file
+	 * @param fileName
+	 * @param commandPart2
+	 * @return user command if it is successfully added
+	 * @throws IOException
+	 */
 	public static String addCommand(String fileName, String commandPart2) throws IOException {
 		File file = new File(fileName);
 		FileWriter fw = new FileWriter(file, true);
@@ -198,13 +244,27 @@ public class TextBuddy {
 		return commandPart2;
 	}
 
+	/**
+	 * This method opens the file for writing and reading
+	 * @param fileName
+	 * @param textBuddy
+	 * @throws IOException
+	 * @throws FileNotFoundException
+	 */
 	private static void openFile(String fileName, TextBuddy textBuddy) throws IOException, FileNotFoundException {
 		file = new File(fileName);
 		if (!file.exists()) {
 			file.createNewFile();
 		}
 	}
-
+	
+	/**
+	 * This method searches for a user command in the file
+	 * @param fileName
+	 * @param commandPart2
+	 * @return number of times the word is found
+	 * @throws IOException
+	 */
 	public static int searchFile(String fileName, String commandPart2) throws IOException {
 		File file = new File(fileName);
 		FileReader fr = new FileReader(file);
@@ -212,8 +272,8 @@ public class TextBuddy {
 
 		commandPart2 = commandPart2.trim();
 		String displayLine;
-		int index = 1;
-		int count = 0;
+		int lineNumberIndex = 1;
+		int countSearchWord = 0;
 
 		while ((displayLine = br.readLine()) != null) {
 			ArrayList<String> displayArray = new ArrayList<String>(Arrays.asList(displayLine.split(" ")));
@@ -221,16 +281,22 @@ public class TextBuddy {
 			for (int i = 0; i < displayArray.size(); i++) {
 				String searchWord = displayArray.get(i);
 				if (searchWord.equals(commandPart2)) {
-					System.out.printf("%s found in line %s\n", commandPart2, index);
-					count++;
+					System.out.printf("%s found in line %s\n", commandPart2, lineNumberIndex);
+					countSearchWord++;
 				}
-				index++;
+				lineNumberIndex++;
 			}
 		}
 
-		return count;
+		return countSearchWord;
 	}
 
+	/**
+	 * This method sorts the file according to ACSII values
+	 * @param fileName
+	 * @return true if sorted
+	 * @throws IOException
+	 */
 	public static boolean sortFile(String fileName) throws IOException {
 		File file = new File(fileName);
 		FileReader fr = new FileReader(file);
