@@ -25,6 +25,7 @@ import java.lang.NumberFormatException;
 
 public class TextBuddy {
 
+	private static final String SEARCH_WORD_S_WAS_NOT_FOUND = "Search word %s was not found\n";
 	private FileWriter fw;
 	private FileReader fr;
 	private BufferedWriter bw;
@@ -40,8 +41,12 @@ public class TextBuddy {
 	private static final String MESSAGE_DELETE = "deleted from %1$s: \"%2$s\"%n";
 	private static final String MESSAGE_ADD = "added to %1$s: \"%2$s\"%n";
 	private static final String MESSAGE_DISPLAY = "%1$s is empty\n";
+	private static final String MESSAGE_SEARCH = "%s found in line %s\n";
+	
 	private static final String INVALID_COMMAND = "invalid command";
-
+	private static final String INVALID_SEARCH = "Search word %s was not found\n";
+	
+	
 	public static void main(String[] args) {
 
 		String fileName = args[0];
@@ -281,7 +286,7 @@ public class TextBuddy {
 			for (int i = 0; i < displayArray.size(); i++) {
 				String searchWord = displayArray.get(i);
 				if (searchWord.equals(commandPart2)) {
-					System.out.printf("%s found in line %s\n", commandPart2, lineNumberIndex);
+					System.out.printf(MESSAGE_SEARCH, commandPart2, lineNumberIndex);
 					countSearchWord++;
 				}
 				lineNumberIndex++;
@@ -289,7 +294,7 @@ public class TextBuddy {
 		}
 
 		if(countSearchWord == 0) {
-			System.out.printf("Search word %s was not found", commandPart2);
+			System.out.printf(INVALID_SEARCH, commandPart2);
 		}
 		
 		return countSearchWord;

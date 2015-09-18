@@ -15,9 +15,15 @@ import org.junit.Test;
 
 public class TextBuddyTest {
 	
+	private static final String SORT_3_STRINGS = "Compare 3 strings";
+	private static final String SORT_EMPTY_FILE = "Compare empty file";
+	private static final String SEARCH_MULTIPLE_INSTANCES = "Multiple instances word test";
+	private static final String SEARCH_SINGULAR_INSTANCE = "Singular instance word test";
+	private static final String SEARCH_EMPTY_FILE = "Empty file search test";
+
 	@Test
 	public void testEmptySearchFile() throws IOException {
-		assertSame("Empty file search test", 0, TextBuddy.searchFile("textfile.txt", "aaa"));
+		assertSame(SEARCH_EMPTY_FILE, 0, TextBuddy.searchFile("textfile.txt", "aaa"));
 		TextBuddy.clearFile("textfile.txt");
 	}
 
@@ -26,7 +32,7 @@ public class TextBuddyTest {
 		TextBuddy.addCommand("textfile.txt", "aaa");
 		TextBuddy.addCommand("textfile.txt", "aaa");
 		TextBuddy.addCommand("textfile.txt", "ccc");
-		assertSame("Multiple instances word test", 2, TextBuddy.searchFile("textfile.txt", "aaa"));
+		assertSame(SEARCH_MULTIPLE_INSTANCES, 2, TextBuddy.searchFile("textfile.txt", "aaa"));
 		TextBuddy.clearFile("textfile.txt");
 	}
 	
@@ -35,13 +41,13 @@ public class TextBuddyTest {
 		TextBuddy.addCommand("textfile.txt", "aaa");
 		TextBuddy.addCommand("textfile.txt", "bbb");
 		TextBuddy.addCommand("textfile.txt", "ccc");
-		assertSame("Singular instance word test", 1, TextBuddy.searchFile("textfile.txt", "aaa"));
+		assertSame(SEARCH_SINGULAR_INSTANCE, 1, TextBuddy.searchFile("textfile.txt", "aaa"));
 		TextBuddy.clearFile("textfile.txt");
 	}
 	
 	@Test
 	public void testEmptySortFile() throws IOException {
-		assertEquals("Compare empty file", true, TextBuddy.sortFile("textfile.txt") );
+		assertEquals(SORT_EMPTY_FILE, true, TextBuddy.sortFile("textfile.txt") );
 		TextBuddy.clearFile("textfile.txt");
 	}
 	
@@ -50,7 +56,7 @@ public class TextBuddyTest {
 		TextBuddy.addCommand("textfile.txt", "bbb");
 		TextBuddy.addCommand("textfile.txt", "ccc");
 		TextBuddy.addCommand("textfile.txt", "aaa");
-		assertEquals("Compare 3 strings", true, TextBuddy.sortFile("textfile.txt") );
+		assertEquals(SORT_3_STRINGS, true, TextBuddy.sortFile("textfile.txt") );
 		TextBuddy.clearFile("textfile.txt");
 	}
 	
