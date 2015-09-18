@@ -5,6 +5,12 @@ import java.io.IOException;
 import org.junit.Test;
 
 public class TextBuddyTest {
+	
+	@Test
+	public void testEmptySearchFile() throws IOException {
+		assertEquals("search empty file", false, TextBuddy.searchFile("textfile.txt", " "));
+		TextBuddy.clearFile("mytextbuddy.txt");
+	}
 
 	@Test
 	public void testSearchFile() throws IOException {
