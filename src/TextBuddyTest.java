@@ -4,26 +4,45 @@ import java.io.IOException;
 
 import org.junit.Test;
 
+
+/**
+ * AUTHOR'S NOTES
+ * This unit testing is only testing 2 methods, searchFile and sortFile.
+ * However, it still uses the other methods such as addCommand and clearFile
+ * But it assumes that the other methods are correct, as previously tested in CE1
+ * @author Shawn
+ */
+
 public class TextBuddyTest {
 	
 	@Test
 	public void testEmptySearchFile() throws IOException {
-		assertEquals("search empty file", false, TextBuddy.searchFile("textfile.txt", " "));
+		assertSame("Empty file search test", 0, TextBuddy.searchFile("textfile.txt", "aaa"));
 		TextBuddy.clearFile("textfile.txt");
 	}
 
+	@Test
+	public void testSearchFileMultipleWords() throws IOException {
+		TextBuddy.addCommand("textfile.txt", "aaa");
+		TextBuddy.addCommand("textfile.txt", "aaa");
+		TextBuddy.addCommand("textfile.txt", "ccc");
+		assertSame("Multiple instances word test", 2, TextBuddy.searchFile("textfile.txt", "aaa"));
+		TextBuddy.clearFile("textfile.txt");
+	}
+	
 	@Test
 	public void testSearchFile() throws IOException {
 		TextBuddy.addCommand("textfile.txt", "aaa");
 		TextBuddy.addCommand("textfile.txt", "bbb");
 		TextBuddy.addCommand("textfile.txt", "ccc");
-		assertSame("test the number of counts of a word", 1, TextBuddy.searchFile("textfile.txt", "aaa"));
+		assertSame("Singular instance word test", 1, TextBuddy.searchFile("textfile.txt", "aaa"));
 		TextBuddy.clearFile("textfile.txt");
 	}
 	
 	@Test
 	public void testEmptySortFile() throws IOException {
 		assertEquals("Compare empty file", true, TextBuddy.sortFile("textfile.txt") );
+		TextBuddy.clearFile("textfile.txt");
 	}
 	
 	@Test
@@ -31,7 +50,8 @@ public class TextBuddyTest {
 		TextBuddy.addCommand("textfile.txt", "bbb");
 		TextBuddy.addCommand("textfile.txt", "ccc");
 		TextBuddy.addCommand("textfile.txt", "aaa");
-		assertEquals("Compare strings", true, TextBuddy.sortFile("textfile.txt") );
+		assertEquals("Compare 3 strings", true, TextBuddy.sortFile("textfile.txt") );
+		TextBuddy.clearFile("textfile.txt");
 	}
 	
 	//@Test

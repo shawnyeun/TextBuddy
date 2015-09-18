@@ -288,6 +288,10 @@ public class TextBuddy {
 			}
 		}
 
+		if(countSearchWord == 0) {
+			System.out.printf("Search word %s was not found", commandPart2);
+		}
+		
 		return countSearchWord;
 	}
 
