@@ -25,7 +25,7 @@ import java.lang.NumberFormatException;
 
 public class TextBuddy {
 
-	private static final String SEARCH_WORD_S_WAS_NOT_FOUND = "Search word %s was not found\n";
+	
 	private FileWriter fw;
 	private FileReader fr;
 	private BufferedWriter bw;
