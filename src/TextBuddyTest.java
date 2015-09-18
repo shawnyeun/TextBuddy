@@ -23,11 +23,14 @@ public class TextBuddyTest {
 	
 	@Test
 	public void testEmptySortFile() throws IOException {
-		assertEquals("Compare strings", true, TextBuddy.sortFile("textfile.txt") );
+		assertEquals("Compare empty file", true, TextBuddy.sortFile("textfile.txt") );
 	}
 	
 	@Test
 	public void testSortFile() throws IOException {
+		TextBuddy.addCommand("textfile.txt", "bbb");
+		TextBuddy.addCommand("textfile.txt", "ccc");
+		TextBuddy.addCommand("textfile.txt", "aaa");
 		assertEquals("Compare strings", true, TextBuddy.sortFile("textfile.txt") );
 	}
 	
